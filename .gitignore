@@ -2,4 +2,4 @@
 server/node_modules/**
 
 #configuration file
-server/congiure.js
+server/configure.js

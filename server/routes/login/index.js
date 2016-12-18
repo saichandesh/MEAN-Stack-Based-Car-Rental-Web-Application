@@ -1,21 +1,22 @@
-module.exports = function(app,users){
+module.exports = function(app,users,bcrypt){
 	app.route('/login')
 	   .post(function(req,res){
 	   		var username = req.body.username;
 	   		var password = req.body.password;
-	   		var query = {'FirstName':username};
+	   		var query = {"userName":username};
 
-	   		users.find().toArray(function(err,docs){
+	   		users.findOne(query,function(err,doc){
 	   			if(err){
 	   				throw err;
+	   			}else if(doc){
+   					if(bcrypt.compareSync(password, doc.password)){
+   						res.send({status : true, found:true});
+   					}else{
+   						res.send({status : false, found:true});
+   					}
 	   			}else{
-	   				res.send(docs);
-	   				// if(doc.LastName == password){
-	   				// 	res.send({status : true});
-	   				// }else{
-	   				// 	res.send({status : false});
-	   				// }
-	   			}
+	   				res.send({status : false, found:false});
+	   			}	   			
 	   		});
 	   });
 	

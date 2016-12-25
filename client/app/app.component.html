@@ -1,0 +1,19 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="home">Car Rental Store</a>
+      
+    </div>
+    <ul class="nav navbar-nav">
+       <li><a *ngIf="sharedService.logged"> Hi! {{sharedService.username}}</a></li>
+       <li><a routerLink="login" *ngIf="!sharedService.logged">Login</a></li>
+       <li><a routerLink="signup" *ngIf="!sharedService.logged">Signup</a></li>
+       <li><a routerLink="history" *ngIf="sharedService.userLogged">Order History</a></li>
+       <li><a routerLink="addcar" *ngIf="sharedService.managerLogged">Add a New Car</a></li>
+       <li><a routerLink="sales" *ngIf="sharedService.managerLogged">Sales</a></li>
+       <li><a><span *ngIf="sharedService.logged" (click)="signout()">SignOut</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

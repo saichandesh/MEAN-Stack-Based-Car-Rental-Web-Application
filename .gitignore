@@ -7,11 +7,3 @@ server/configure.js
 
 #bower components
 client/bower_components/**
-
-#Ignore js and Map files in components and services
-client/app/**.**.js
-client/app/**.**.js.map
-client/app/components/**/**.**.js
-client/app/components/**/**.**.js.map
-client/app/services/**/**.**.js
-client/app/services/**/**.**.js.map

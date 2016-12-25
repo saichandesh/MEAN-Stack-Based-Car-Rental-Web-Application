@@ -1,18 +1,20 @@
-module.exports = function(app,rentalcars,multer){
+module.exports = function(app,rentalcars,multer,host,port){
 
 	var fs = require('fs');
 	//To view the cars
 	app.route('/cars/view')
 	   .get(function(req,res){
-
 	   		rentalcars.find().toArray(function(err,docs){
 	   			if(err){
-	   				res.send([{found:false}]);
+	   				res.json([{found:false}]);
 	   			}else{
+	   				var data = [];
 	   				for(var i=0;i<docs.length;i++){
-	   					docs[i].imagePath = fs.readFileSync('./assets/images/'+docs[i].imagePath);
+	   					docs[i].imagePath = 'http://'+host+':'+port+'/static/images/'+docs[i].imagePath;
+	   					data.push(docs[i]);
 	   				}
-	   				res.send(docs);
+	   				
+	   				res.json(data);
 	   			}
 	   		});
 	});
@@ -46,7 +48,7 @@ module.exports = function(app,rentalcars,multer){
 	   			carName : req.body.carname,
 	   			segment : req.body.segment,
 	   			rentCost : req.body.rentcost,
-	   			imagePath : filepath
+	   			imagePath : req.body.filepath
    			}
 
    			rentalcars.insert(doc,function(err,result){
@@ -63,7 +65,7 @@ module.exports = function(app,rentalcars,multer){
 	 //To update car information
 	 app.route('/cars/update')
 	 	.put(function(req,res){
-	 		var query = {carName : req.query.carname};
+	 		var query = {carName : req.body.carname};
 	 		var updateinfo = {$set: {
 	   			segment : req.body.segment,
 	   			rentCost : req.body.rentcost

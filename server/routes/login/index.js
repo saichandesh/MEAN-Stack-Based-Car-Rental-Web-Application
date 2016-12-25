@@ -10,12 +10,12 @@ module.exports = function(app,users,bcrypt){
 	   				throw err;
 	   			}else if(doc){
    					if(bcrypt.compareSync(password, doc.password)){
-   						res.send({status : true, found:true});
+   						res.json({status : true, found:true, role:doc.role});
    					}else{
-   						res.send({status : false, found:true});
+   						res.json({status : false, found:true, role:null});
    					}
 	   			}else{
-	   				res.send({status : false, found:false});
+	   				res.json({status : false, found:false ,role:null});
 	   			}	   			
 	   		});
 	   });

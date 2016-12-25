@@ -5,12 +5,11 @@ module.exports = function(app,users,bcrypt){
 	   		var password = req.body.password;
 	   		var encryptedPassword = bcrypt.hashSync(password, salt); //To hash a password
 
-	   		var doc = { userName:req.body.username,
+	   		var doc = { userName: req.body.username,
 	   					password : encryptedPassword,
-						FirstName:req.body.firstname,
-						LastName:req.body.lastname,
-						Email:req.body.email,
-						BookingHistory : [],
+						FirstName: req.body.firstname,
+						LastName: req.body.lastname,
+						Email: req.body.email,
 						role : "user"
 			};
 

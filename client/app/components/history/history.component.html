@@ -1,0 +1,15 @@
+<h2> Order History</h2>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th> Car Name</th>
+			<th> Booking Date</th>
+		</tr>
+	</thead>
+	<tbody *ngFor="let order of orders">
+		<tr>
+			<td>{{order.carName}}</td>
+			<td>{{order.bookingDate | date:"MM/dd/yy"}}</td>
+		</tr>
+	</tbody>
+</table>

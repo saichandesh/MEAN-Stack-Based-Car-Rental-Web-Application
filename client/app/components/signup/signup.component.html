@@ -1,0 +1,14 @@
+<div class="row">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-7 offset-xs-3">
+	<h2>Signup</h2>
+		<input class="form-control" type="text" placeholder="User Name" [(ngModel)]="username"><br/>
+		<input type="password" class="form-control" placeholder="Password" [(ngModel)]="password"><br/>
+		<input class="form-control" type="text" placeholder="First Name" [(ngModel)]="firstname"><br/>
+		<input class="form-control" type="text" placeholder="Last Name" [(ngModel)]="lastname"><br/>
+		<input class="form-control" type="email" placeholder="Email ID" [(ngModel)]="email"><br/>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" (click)="signupDetails()">
+	        Submit</button><br/>
+		<div class="alert alert-danger" *ngIf="error">{{errorMessage}}</div> 
+	</div>
+</div>

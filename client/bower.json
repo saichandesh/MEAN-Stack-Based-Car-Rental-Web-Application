@@ -1,0 +1,33 @@
+{
+  "name": "client",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Sai Chandesh Gurramkonda"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "AngularJS",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Sass",
+    "Gulp",
+    "HTML5",
+    "CSS3",
+    "and",
+    "Bootstrap",
+    "3"
+  ],
+  "homepage": "https://github.com/saichandesh/MEAN-Stack-Based-Car-Rental-Web-Application",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

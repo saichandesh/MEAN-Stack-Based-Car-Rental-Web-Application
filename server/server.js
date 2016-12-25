@@ -14,6 +14,7 @@ try{
 }
 var usersCollection = config.usersCollection;
 var rentalCarsCollection = config.rentalCarsCollection;
+var orderCollection = config.orderCollection;
 var login = require('./routes/login/index.js');
 var signup = require('./routes/signup/index.js');
 var cars = require('./routes/cars/index.js');
@@ -34,21 +35,24 @@ Database.open(function (err, mongoclient) {
 	            	throw err; 
 	           	}else{
 					console.log("Connected to the database Successfully");
-					app.use(function(req, res, next) { //allow cross origin requests
-				        res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
-				        res.header("Access-Control-Allow-Origin", "http://localhost:9019");
-				        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-				        next();
-				    });
+					app.use(function(req, res, next) {
+					  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+					  res.setHeader("Access-Control-Allow-Credentials", "false");
+					  res.header("Access-Control-Allow-Methods","GET,PUT,POST,DELETE");
+					  res.header("Access-Control-Allow-Headers", "Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,Keep-Alive,X-Requested-With,If-Modified-Since");
+					  next();
+					});
+
 					app.use(bodyParser.urlencoded({ extended: true }));
 		            app.use(bodyParser.json());
-
+		            app.use('/static',express.static('assets'));
 					var users = Database.collection(usersCollection);
 					var rentalcars = Database.collection(rentalCarsCollection);
+					var orders = Database.collection(orderCollection);
 					login(app,users,bcrypt);
 					signup(app,users,bcrypt);
-					cars(app,rentalcars,multer);
-					bookinghistory(app,users);
+					cars(app,rentalcars,multer,config.SERVERHOST,config.SERVERPORT);
+					bookinghistory(app,orders,users);
 				}
 			});
 		}
